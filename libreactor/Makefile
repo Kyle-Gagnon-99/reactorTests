@@ -6,6 +6,15 @@ OUTPUT		:= ReactorTestMain.exe
 # All CPP files to compile
 CPP_SRC += $(SRC)/ReactorTestMain.cpp
 
+# Reactors
+CPP_SRC += $(SRC)/reactor/SimpleReactor.cpp
+CPP_SRC += $(SRC)/reactor/SimpleReactor_sm.cpp
+
+# Events
+CPP_SRC += $(SRC)/events/EvBase.cpp
+CPP_SRC += $(SRC)/events/EvSimpleMessage.cpp
+CPP_SRC += $(SRC)/events/EvSimpleNumber.cpp
+
 # Compile OBJ files (.o) to a build directory
 CPP_OBJ		:= $(addprefix $(BLD_DIR), $(subst $(PRJ_DIR), ,$(CPP_SRC:.cpp=.o)))
 
@@ -26,6 +35,12 @@ LIBS_DIR	+= /usr/local/lib
 LIBS		+= spdlog
 LIBS		+= pthread
 LIBS		+= reactor
+LIBS		+= protobuf
+
+USE_EVENT_SERVICE	?=y
+ifeq ($(USE_EVENT_SERVICE),y)
+DEFINES		+= USE_EVENT_SERVICE
+endif
 
 all: $(OUTPUT)
 
@@ -52,4 +67,6 @@ clean:
 -include $(DEP)
 
 	
+include make_rules/proto.mk
+include make_rules/smc.mk
 include make_rules/debug_rules.mk

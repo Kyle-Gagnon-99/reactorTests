@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package events;
+option java_package = "com.github.kylegagnon99.events";
+
+import "EvSimpleMessage.proto";
+import "EvSimpleNumber.proto";
+
+message EvBase {
+    uint32 source = 1;
+    uint32 destination = 2;
+    oneof events {
+        EvSimpleMessage evSimpleMessage = 3;
+        EvSimpleNumber evSimpleNumber = 4;
+    }
+}

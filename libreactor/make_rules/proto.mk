@@ -1,9 +1,9 @@
 # Google Protocol Buffer
 PROTOC					:= /usr/local/bin/protoc
 
-PROTOC_FILES_OUTPUT		?= $(HOME)/reactorPrj/proto
+PROTOC_FILES_OUTPUT		?= $(HOME)/reactorPrj/reactorTests/reactorTests/protoc
 
-PROTOC_INPUT_PREFIX 	?= $(PRJ_DIR)/protoc
+PROTOC_INPUT_PREFIX 	?= $(HOME)/reactorPrj/reactorTests/reactorTests/protoc
 
 PROTOC_FILE				?=
 
@@ -25,8 +25,10 @@ PROTOC_OUTPUT			?= $(PROTOC_FILES_OUTPUT)
 .PHONY: protoc-generate
 protoc-generate:
 	$(VERBOSE)$(MKDIR) -p $(PROTOC_OUTPUT)
+	$(VERBOSE)$(RM) -f $(PROTOC_OUTPUT)/$(PROTOC_INPUT_FILE:.proto=.cpp)
+	$(VERBOSE)$(RM) -f $(PROTOC_OUTPUT)/$(PROTOC_INPUT_FILE:.proto=.h)
+	$(VERBOSE)$(RM) -f $(PROTOC_OUTPUT)/$(PROTOC_INPUT_FILE:.proto=.py)
 	$(VERBOSE)$(PROTOC) -I=$(PROTOC_INPUT_PREFIX) --cpp_out=$(PROTOC_OUTPUT) --java_out=$(PROTOC_OUTPUT) --python_out=$(PROTOC_OUTPUT) $(PROTOC_INPUT_FILE)
-#	$(VERBOSE)$(RM) $(PROTOC_OUTPUT)/$(PROTOC_INPUT_FILE).*
 	$(VERBOSE)$(RENAME) 's/.pb.cc/.cpp/' $(PROTOC_OUTPUT)/*
 	$(VERBOSE)$(RENAME) 's/.pb.h/.h/' $(PROTOC_OUTPUT)/*
 	$(VERBOSE)$(RENAME) 's/_pb2.py/.py/' $(PROTOC_OUTPUT)/*

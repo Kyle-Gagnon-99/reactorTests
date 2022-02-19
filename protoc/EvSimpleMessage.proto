@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package events;
+option java_package = "com.github.kylegagnon99.events";
+
+message EvSimpleMessage {
+    string message = 1;
+}

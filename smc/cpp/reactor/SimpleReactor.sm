@@ -1,0 +1,18 @@
+%class SimpleReactor
+%header SimpleReactor.h
+%include "events/EvBase.h"
+
+%import events
+
+%start MainMap::Start
+
+%map MainMap
+
+%%
+Start
+Entry { printLogStatement(); }
+{
+    receivedEvSimpleMsg(p_evSimpleMessage:  events::EvBase)     Start     { procSimpleMessage(p_evSimpleMessage); }
+    receivedEvSimpleNumber(p_evSimpleNumber: events::EvBase)    Start     { procSimpleNumber(p_evSimpleNumber); }     
+}
+%%

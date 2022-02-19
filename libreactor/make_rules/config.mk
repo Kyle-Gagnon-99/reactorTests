@@ -15,12 +15,15 @@ PWD			:= pwd
 RENAME		:= rename
 BASENAME	:= basename
 CUT			:= cut
+FIND		:= /usr/bin/find
+SED			:= /usr/bin/sed
+MV			:= /usr/bin/mv
 
 # Top Level Variables
 CUR_DIR		:= $(shell $(PWD))
-PRJ_DIR		?= $(CUR_DIR)
-BLD_DIR		:= $(PRJ_DIR)/build_dir
-SRC			:= $(PRJ_DIR)/src
+PRJ_DIR		?= $(HOME)/reactorPrj/reactorTests/reactorTests
+BLD_DIR		:= $(PRJ_DIR)/libreactor/build_dir
+SRC			:= $(PRJ_DIR)/libreactor/src
 PRJ_NAME	?= reactor
 
 # This is empty because we can add actual defines in the Makefile
